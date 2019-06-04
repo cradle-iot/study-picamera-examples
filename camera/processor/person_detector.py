@@ -46,18 +46,18 @@ class PersonDetector(object):
                 continue
 
             idx = int(detections[0, 0, i, 1])
-            if idx != 16:#15:
+            if idx != 15:
                 continue
 
             box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
             (startX, startY, endX, endY) = box.astype('int')
-            label = '{}: {:.2f}%'.format('Chair', confidence * 100)#('Person', confidence * 100)
+            label = '{}: {:.2f}%'.format('person', confidence * 100)#('Person', confidence * 100)
             cv2.rectangle(frame, (startX, startY), (endX, endY), (0, 255, 0), 2)
             y = startY - 15 if startY - 15 > 15 else startY + 15
             cv2.putText(frame, label, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
             count += 1
         
         if count > 0:
-            print('Count_plant: {}'.format(count))
+            print('Count_person: {}'.format(count))
                 
         return frame
