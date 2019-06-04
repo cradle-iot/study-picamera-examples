@@ -22,8 +22,8 @@ def gen(camera):
     while True:
         frame = camera.get_frame()
         camera.process_image(frame)
-        #yield (b'--frame\r\n'
-        #       b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 #@app.route('/video_feed')
 def video_feed():
@@ -33,4 +33,4 @@ def video_feed():
 if __name__ == '__main__':
     # app.run(host='0.0.0.0', debug=False, threaded=True)
     print('running...')
-    gen(video_camera)
+    video_feed()
