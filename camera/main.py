@@ -32,5 +32,5 @@ def video_feed():
 if __name__ == '__main__':
     # app.run(host='0.0.0.0', debug=False, threaded=True)
     while True:
-        video_camera = VideoCamera(flip=False)
+        frame = video_camera.get_frame()
         print('test')
