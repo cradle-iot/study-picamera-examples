@@ -20,8 +20,8 @@ video_camera = VideoCamera(flip=False)
 
 def gen(camera):
     while True:
-        frame = camera.get_frame().process_image()
-        
+        frame = camera.get_frame()
+        camera.process_image(self, frame)
         #yield (b'--frame\r\n'
         #       b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
