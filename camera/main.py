@@ -20,9 +20,10 @@ video_camera = VideoCamera(flip=False)
 
 def gen(camera):
     while True:
-        frame = camera.get_frame()
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+        frame = camera.get_frame().process_image()
+        
+        #yield (b'--frame\r\n'
+        #       b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 #@app.route('/video_feed')
 def video_feed():
