@@ -46,7 +46,7 @@ class PersonDetector(object):
                 continue
 
             idx = int(detections[0, 0, i, 1])
-            if idx != 9:#15:
+            if idx != 16:#15:
                 continue
 
             box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
@@ -58,6 +58,6 @@ class PersonDetector(object):
             count += 1
         
         if count > 0:
-            print('Count_chair: {}'.format(count))
+            print('Count_plant: {}'.format(count))
                 
         return frame
