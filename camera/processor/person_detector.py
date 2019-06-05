@@ -1,5 +1,5 @@
 from __future__ import print_function
-from imutils.video.webcamvideostream import WebcamVideoStream as PiVideoStream
+from imutils.video.webcamvideostream import WebcamVideoStream
 from imutils.object_detection import non_max_suppression
 import imutils
 import time
@@ -13,7 +13,7 @@ net = cv2.dnn.readNetFromCaffe('/home/pi/models/MobileNetSSD_deploy.prototxt',
 
 class PersonDetector(object):
     def __init__(self, flip = True):
-        self.vs = PiVideoStream().start()
+        self.vs = WebcamVideoStream().start()
         self.flip = flip
         time.sleep(2.0)
         
@@ -46,8 +46,8 @@ class PersonDetector(object):
                 continue
 
             idx = int(detections[0, 0, i, 1])
-            #if idx != 15:
-            #    continue
+            if idx != 15:
+                continue
 
             box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
             (startX, startY, endX, endY) = box.astype('int')
