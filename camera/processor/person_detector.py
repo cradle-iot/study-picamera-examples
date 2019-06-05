@@ -46,8 +46,8 @@ class PersonDetector(object):
                 continue
 
             idx = int(detections[0, 0, i, 1])
-            if idx != 15:
-                continue
+            #if idx != 15:
+            #    continue
 
             box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
             (startX, startY, endX, endY) = box.astype('int')
