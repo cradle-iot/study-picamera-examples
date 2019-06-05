@@ -79,7 +79,7 @@ class PersonDetector(object):
         if count > 0:
             print('Count_person: {}'.format(count))
             elapsed = time.time() - self.last_upload
-            if elapsed > 30:
+            if elapsed > 5:
                 request(count)
                 self.last_upload = time.time()
                 
