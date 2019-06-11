@@ -24,7 +24,8 @@ def request(count):
         'created': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
         'd1': count,
     })
-
+    
+print('model reading')
 net = cv2.dnn.readNetFromCaffe('/var/isaax/project/camera/processor/MobileNetSSD_deploy.prototxt',
         '/var/isaax/project/camera/processor/MobileNetSSD_deploy.caffemodel')
 print('read ok')
