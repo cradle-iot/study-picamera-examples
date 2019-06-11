@@ -27,7 +27,7 @@ def request(count):
 
 net = cv2.dnn.readNetFromCaffe('/var/isaax/project/camera/processor/MobileNetSSD_deploy.prototxt',
         '/var/isaax/project/camera/processor/MobileNetSSD_deploy.caffemodel')
-
+print('read ok')
 
 class PersonDetector(object):
     def __init__(self, flip = True):
