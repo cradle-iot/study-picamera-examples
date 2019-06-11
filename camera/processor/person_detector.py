@@ -25,8 +25,8 @@ def request(count):
         'd1': count,
     })
 
-net = cv2.dnn.readNetFromCaffe('/home/pi/models/MobileNetSSD_deploy.prototxt',
-        '/home/pi/models/MobileNetSSD_deploy.caffemodel')
+net = cv2.dnn.readNetFromCaffe('MobileNetSSD_deploy.prototxt',
+        'MobileNetSSD_deploy.caffemodel')
 
 
 class PersonDetector(object):
