@@ -59,7 +59,7 @@ class PersonDetector(object):
         detections = net.forward()
 
         count_list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                      0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         for i in np.arange(0, detections.shape[2]):
             confidence = detections[0, 0, i, 2]
 
@@ -76,7 +76,7 @@ class PersonDetector(object):
             cv2.putText(frame, label, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
             count_list[idx] += 1
         
-        for i in range(20):
+        for i in range(21):
             if count_list[i] > 0:
                 print('Count_{}: {}'.format(obj[i], count_list[i]))
                 elapsed = time.time() - self.last_upload
