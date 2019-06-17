@@ -15,9 +15,9 @@ try:
     AMBIENT_CHANNEL_ID = int(os.environ['AMBIENT_CHANNEL_ID'])
     AMBIENT_WRITE_KEY = os.environ['AMBIENT_WRITE_KEY']
 except KeyError as e:
-    sys.exit('Couldn\'t find env: {}'.format(e))
+    pass#sys.exit('Couldn\'t find env: {}'.format(e))
 
-am = ambient.Ambient(AMBIENT_CHANNEL_ID, AMBIENT_WRITE_KEY)
+#am = ambient.Ambient(AMBIENT_CHANNEL_ID, AMBIENT_WRITE_KEY)
 
 def request(count):
     am.send({
