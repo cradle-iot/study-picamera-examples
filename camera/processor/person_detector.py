@@ -77,7 +77,7 @@ class PersonDetector(object):
             count_list[idx] += 1
         
         for i in range(20):
-            if count > 0:
+            if count_list[i] > 0:
                 print('Count_{}: {}'.format(obj[i], count_list[i]))
                 elapsed = time.time() - self.last_upload
                 if elapsed > 5:
