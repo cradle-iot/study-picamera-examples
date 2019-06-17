@@ -58,7 +58,8 @@ class PersonDetector(object):
         net.setInput(blob)
         detections = net.forward()
 
-        count = 0
+        count_list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                      0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         for i in np.arange(0, detections.shape[2]):
             confidence = detections[0, 0, i, 2]
 
@@ -66,22 +67,26 @@ class PersonDetector(object):
                 continue
 
             idx = int(detections[0, 0, i, 1])
-            if idx != 15:
-                continue
 
             box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
             (startX, startY, endX, endY) = box.astype('int')
-            label = '{}: {:.2f}%'.format('person', confidence * 100)#('Person', confidence * 100)
+            label = '{}: {:.2f}%'.format(obj[idx], confidence * 100)#('Person', confidence * 100)
             cv2.rectangle(frame, (startX, startY), (endX, endY), (0, 255, 0), 2)
             y = startY - 15 if startY - 15 > 15 else startY + 15
             cv2.putText(frame, label, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
-            count += 1
+            count_list[idx] += 1
         
-        if count > 0:
-            print('Count_person: {}'.format(count))
-            elapsed = time.time() - self.last_upload
-            if elapsed > 5:
-                request(count)
-                self.last_upload = time.time()
+        for i in range(20):
+            if count > 0:
+                print('Count_{}: {}'.format(obj[i], count_list[i]))
+                elapsed = time.time() - self.last_upload
+                if elapsed > 5:
+                    #request(count)
+                    self.last_upload = time.time()
                 
         return frame
+    
+obj = ["background", "aeroplane", "bicycle", "bird", "boat",
+       "bottle", "bus", "car", "cat", "chair", "cow", "diningtable",
+       "dog", "horse", "motorbike", "person", "pottedplant", "sheep",
+       "sofa", "train", "tvmonitor"]
