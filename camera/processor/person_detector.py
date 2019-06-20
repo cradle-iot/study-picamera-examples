@@ -13,8 +13,8 @@ import requests
 import json
 
 print('model reading')
-net = cv2.dnn.readNetFromCaffe('./processor/MobileNetSSD_deploy.prototxt',
-        './processor/MobileNetSSD_deploy.caffemodel')
+net = cv2.dnn.readNetFromCaffe('/var/isaax/project/camera/processor/MobileNetSSD_deploy.prototxt',
+        '/var/isaax/project/camera/processor/MobileNetSSD_deploy.caffemodel')
 print('read ok')
 
 class PersonDetector(object):
