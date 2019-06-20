@@ -71,7 +71,7 @@ class PersonDetector(object):
             data[obj[i]] = count_list[i]
             data['date'] = datetime.now().strftime('%Y%m%d%H%M%S')
         
-        if sum(data) > 0:
+        if sum(count_list) > 0:
             http_post(data)
         
         return frame
