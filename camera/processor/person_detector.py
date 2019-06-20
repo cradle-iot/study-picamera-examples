@@ -7,32 +7,18 @@ import numpy as np
 import cv2
 
 from datetime import datetime
-import ambient
 import os
 import sys
+import requests
+import json
 
-try:        
-    AMBIENT_CHANNEL_ID = int(os.environ['AMBIENT_CHANNEL_ID'])
-    AMBIENT_WRITE_KEY = os.environ['AMBIENT_WRITE_KEY']
-except KeyError as e:
-    pass#sys.exit('Couldn\'t find env: {}'.format(e))
-
-#am = ambient.Ambient(AMBIENT_CHANNEL_ID, AMBIENT_WRITE_KEY)
-
-def request(count):
-    am.send({
-        'created': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-        'd1': count,
-    })
-    
 print('model reading')
-net = cv2.dnn.readNetFromCaffe('/var/isaax/project/camera/processor/MobileNetSSD_deploy.prototxt',
-        '/var/isaax/project/camera/processor/MobileNetSSD_deploy.caffemodel')
+net = cv2.dnn.readNetFromCaffe('processor/MobileNetSSD_deploy.prototxt',
+        'processor/MobileNetSSD_deploy.caffemodel')
 print('read ok')
 
 class PersonDetector(object):
     def __init__(self, flip = True):
-        self.last_upload = time.time()
         self.vs = WebcamVideoStream().start()
         self.flip = flip
         time.sleep(2.0)
@@ -76,17 +62,26 @@ class PersonDetector(object):
             cv2.putText(frame, label, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
             count_list[idx] += 1
         
+        data = {}
         for i in range(21):
+            
             if count_list[i] > 0:
                 print('Count_{}: {}'.format(obj[i], count_list[i]))
-                elapsed = time.time() - self.last_upload
-                if elapsed > 5:
-                    #request(count)
-                    self.last_upload = time.time()
-                
+            
+            data[obj[i]] = count_list[i]
+            data['date'] = datetime.now().strftime('%Y%m%d%H%M%S')
+        
+        
+        http_post(data)
         return frame
     
 obj = ["background", "aeroplane", "bicycle", "bird", "boat",
        "bottle", "bus", "car", "cat", "chair", "cow", "diningtable",
        "dog", "horse", "motorbike", "person", "pottedplant", "sheep",
        "sofa", "train", "tvmonitor"]
+
+def http_post(dic):
+    post_url = os.environ['POST_URL'])
+    r = requests.post(post_url, data=json.dumps(dic))
+    print(r)
+    
