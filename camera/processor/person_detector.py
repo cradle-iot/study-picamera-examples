@@ -81,7 +81,7 @@ obj = ["background", "aeroplane", "bicycle", "bird", "boat",
        "sofa", "train", "tvmonitor"]
 
 def http_post(dic):
-    post_url = os.environ['POST_URL'])
+    post_url = os.environ['POST_URL']
     r = requests.post(post_url, data=json.dumps(dic))
     print(r)
     
