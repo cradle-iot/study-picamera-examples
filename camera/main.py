@@ -33,4 +33,4 @@ if __name__ == '__main__':
 #    app.run(host='0.0.0.0', debug=False, threaded=True)
     while True:
         video_camera.get_frame()
-        time.sleep(5.0)
+        #time.sleep(5.0)
