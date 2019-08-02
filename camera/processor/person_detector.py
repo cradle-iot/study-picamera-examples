@@ -1,5 +1,6 @@
 from __future__ import print_function
 from imutils.video.webcamvideostream import WebcamVideoStream
+from imutils.video.pivideostream import PiVideoStream
 from imutils.object_detection import non_max_suppression
 import imutils
 import time
@@ -19,7 +20,8 @@ print('read ok')
 
 class PersonDetector(object):
     def __init__(self, flip = True):
-        self.vs = WebcamVideoStream().start()
+        #self.vs = WebcamVideoStream().start()
+        self.vs = PiVideoStream(resolution=(800, 608)).start()
         self.flip = flip
         time.sleep(2.0)
         
