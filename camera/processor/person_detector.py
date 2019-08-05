@@ -95,9 +95,9 @@ obj = ["background", "aeroplane", "bicycle", "bird", "boat",
 def insert(items):
     # データベース接続の初期化
     session = boto3.session.Session(
-                                    region_name = os.environ['REGION']
-                                    aws_access_key_id = os.environ['A_KEY']
-                                    aws_secret_access_key = os.environ['S_KEY']
+                                    region_name = os.environ['REGION'],
+                                    aws_access_key_id = os.environ['A_KEY'],
+                                    aws_secret_access_key = os.environ['S_KEY'],
                                     )
     dynamodb = session.resource('dynamodb')
 
