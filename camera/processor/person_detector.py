@@ -71,7 +71,7 @@ class PersonDetector(object):
             data = {}
             data['data'] = {'x': (endX-startX)/2, 'y':(endY-startY)/2}
             data['timestamp'] = datetime.datetime.now().timestamp()
-            data['device'] = 'fujiwara_desktopPC'
+            data['device'] = os.environ['DEVICE']
 
             for i in range(21):
                 if count_list[i] > 0 and i == 15:
