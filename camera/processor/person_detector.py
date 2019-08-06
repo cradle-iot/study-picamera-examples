@@ -48,6 +48,7 @@ class PersonDetector(object):
 
         count_list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        person_id = 0
         for i in np.arange(0, detections.shape[2]):
             confidence = detections[0, 0, i, 2]
 
@@ -65,25 +66,27 @@ class PersonDetector(object):
             y = startY - 15 if startY - 15 > 15 else startY + 15
             cv2.putText(frame, label, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
             count_list[idx] += 1
-            
-            
         
             data = {}
             data['data'] = {'x': (endX-startX)/2, 'y':(endY-startY)/2}
             data['timestamp'] = datetime.datetime.now().timestamp()
             data['device'] = os.environ['DEVICE']
+            data['person_id'] = person_id
+            person_id += 1
 
             for i in range(21):
                 if count_list[i] > 0 and i == 15:
                     print('Count_{}: {}'.format(obj[i], count_list[i]))
-                    data['data'][obj[i]] = count_list[i]
-                
-            data = json.dumps(data)
-            data = json.loads(data, parse_float=decimal.Decimal)
+#                    data['data'][obj[i]] = count_list[i]
             
-            items = [data]
-            if sum(count_list) > 0:
-                insert(items)
+            
+                
+#            data = json.dumps(data)
+#            data = json.loads(data, parse_float=decimal.Decimal)
+#            
+#            items = [data]
+#            if sum(count_list) > 0:
+#                insert(items)
                     
         return frame
     
