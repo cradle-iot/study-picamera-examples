@@ -26,6 +26,7 @@ print('read ok.')
 vs = WebcamVideoStream().start()
 time.sleep(2.0)
 
+data_list = []
 while True:
     frame = vs.read()
     frame = imutils.resize(frame, width=640)
@@ -34,8 +35,8 @@ while True:
     net.setInput(blob)
     detections = net.forward()
     
-    count_list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+#    count_list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#                  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     person_id = 0
     for i in np.arange(0, detections.shape[2]):
         confidence = detections[0, 0, i, 2]
@@ -53,15 +54,17 @@ while True:
         cv2.rectangle(frame, (startX, startY), (endX, endY), (0, 255, 0), 2)
         y = startY - 15 if startY - 15 > 15 else startY + 15
         cv2.putText(frame, label, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
-        count_list[idx] += 1
+#        count_list[idx] += 1
     
         data = {}
         data['data'] = {'x': (endX-startX)/2, 'y':(endY-startY)/2}
         data['timestamp'] = datetime.datetime.now().timestamp()
         data['device'] = os.environ['DEVICE']
         data['person_id'] = person_id
-        person_id += 1
+        person_id += 1        
+        print('id:', person_id, 'x:', x, 'y:', y, 'Time:',datetime.datetime.now())
         
-        for i in range(21):
-            if count_list[i] > 0 and i == 15:
-                print('Count_{}: {}'.format(obj[i], count_list[i]),datetime.datetime.now())
+        data_list.append(data)
+        if len(data_list) > 10:
+            print(data_list)
+            data_list = []
