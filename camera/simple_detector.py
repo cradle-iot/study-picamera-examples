@@ -88,13 +88,7 @@ while True:
         data['data']['x'] = (endX-startX)/2
         data['data']['y'] = (endY-startY)/2
 
-        print(
-            'id:', data['data']['person_id'],
-            'x:', data['data']['x'],
-            'y:', data['data']['y'],
-            'Time:',datetime.datetime.now()
-            )
-        
+        print(data)
         data_list.append(data)
         data['person_id'] += 1
         
