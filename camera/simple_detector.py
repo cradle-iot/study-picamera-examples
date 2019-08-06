@@ -14,6 +14,9 @@ import json
 import boto3
 
 def insert(items):
+    items = json.dumps(items)
+    items = json.loads(items, parse_float=decimal.Decimal)
+    
     # データベース接続の初期化
     session = boto3.session.Session(
                                     region_name = os.environ['REGION'],
