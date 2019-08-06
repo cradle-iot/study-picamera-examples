@@ -59,9 +59,10 @@ while True:
         data['device'] = os.environ['DEVICE']
         data['person_id'] = person_id
         person_id += 1        
-        print('id:', person_id, 'x:', data['x'], 'y:', data['y'], 'Time:',datetime.datetime.now())
+        print('id:', person_id, 'x:', data['data']['x'], 'y:', data['data']['y'], 'Time:',datetime.datetime.now())
         
         data_list.append(data)
-        if len(data_list) > 10:
-            print(data_list)
-            data_list = []
+        
+    if len(data_list) > 10:
+        print(data_list)
+        data_list = []
