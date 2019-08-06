@@ -76,7 +76,7 @@ class PersonDetector(object):
 
             for i in range(21):
                 if count_list[i] > 0 and i == 15:
-                    print('Count_{}: {}'.format(obj[i], count_list[i]))
+                    print('Count_{}: {}'.format(obj[i], count_list[i]),datetime.datetime.now())
 #                    data['data'][obj[i]] = count_list[i]
             
             
