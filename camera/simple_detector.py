@@ -29,7 +29,7 @@ time.sleep(2.0)
 data_list = []
 while True:
     frame = vs.read()
-    frame = imutils.resize(frame, width=640)
+    frame = imutils.resize(frame, width=300)
     (h, w) = frame.shape[:2]
     blob = cv2.dnn.blobFromImage(frame, 0.007843, (300, 300), 127.5)
     net.setInput(blob)
