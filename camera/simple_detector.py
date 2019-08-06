@@ -35,8 +35,6 @@ while True:
     net.setInput(blob)
     detections = net.forward()
     
-#    count_list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-#                  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     person_id = 0
     for i in np.arange(0, detections.shape[2]):
         confidence = detections[0, 0, i, 2]
@@ -47,14 +45,13 @@ while True:
         idx = int(detections[0, 0, i, 1])
         if idx != 15:
             continue
-        
+
         box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
         (startX, startY, endX, endY) = box.astype('int')
-        label = '{}: {:.2f}%'.format(obj[idx], confidence * 100)#('Person', confidence * 100)
+        label = '{}: {:.2f}%'.format(obj[idx], confidence * 100)
         cv2.rectangle(frame, (startX, startY), (endX, endY), (0, 255, 0), 2)
         y = startY - 15 if startY - 15 > 15 else startY + 15
         cv2.putText(frame, label, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
-#        count_list[idx] += 1
     
         data = {}
         data['data'] = {'x': (endX-startX)/2, 'y':(endY-startY)/2}
@@ -62,7 +59,7 @@ while True:
         data['device'] = os.environ['DEVICE']
         data['person_id'] = person_id
         person_id += 1        
-        print('id:', person_id, 'x:', x, 'y:', y, 'Time:',datetime.datetime.now())
+        print('id:', person_id, 'x:', data['x'], 'y:', data['y'], 'Time:',datetime.datetime.now())
         
         data_list.append(data)
         if len(data_list) > 10:
