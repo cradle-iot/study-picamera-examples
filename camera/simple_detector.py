@@ -67,6 +67,7 @@ while True:
     data['timestamp'] = datetime.datetime.now().timestamp()
     data['device'] = os.environ['DEVICE']
     data['person_id'] = 0
+    data['data'] = {}
     for i in np.arange(0, detections.shape[2]):
         confidence = detections[0, 0, i, 2]
     
