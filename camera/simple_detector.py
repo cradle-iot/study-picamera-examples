@@ -35,7 +35,10 @@ while True:
     net.setInput(blob)
     detections = net.forward()
     
-    person_id = 0
+    data = {}
+    data['timestamp'] = datetime.datetime.now().timestamp()
+    data['device'] = os.environ['DEVICE']
+    data['person_id'] = 0
     for i in np.arange(0, detections.shape[2]):
         confidence = detections[0, 0, i, 2]
     
@@ -53,10 +56,9 @@ while True:
         y = startY - 15 if startY - 15 > 15 else startY + 15
         cv2.putText(frame, label, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
     
-        data = {}
-        data['data'] = {'person_id': person_id, 'x': (endX-startX)/2, 'y':(endY-startY)/2}
-        data['timestamp'] = datetime.datetime.now().timestamp()
-        data['device'] = os.environ['DEVICE']
+        data['data']['x'] = (endX-startX)/2
+        data['data']['y'] = (endY-startY)/2
+
         print(
             'id:', data['data']['person_id'],
             'x:', data['data']['x'],
@@ -65,8 +67,8 @@ while True:
             )
         
         data_list.append(data)
-        person_id += 1        
-
+        data['person_id'] += 1
+        
     if len(data_list) > 10:
         print(data_list)
         data_list = []
