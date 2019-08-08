@@ -12,6 +12,7 @@ import datetime
 import decimal
 import json
 import boto3
+import copy
 
 def insert(items):
     items = json.dumps(items)
@@ -73,10 +74,8 @@ while True:
     data['data'] = {}
     for i in np.arange(0, detections.shape[2]):
         confidence = detections[0, 0, i, 2]
-    
         if confidence < 0.2:
-            continue
-    
+            continue    
         idx = int(detections[0, 0, i, 1])
         if idx != 15:
             continue
@@ -88,7 +87,7 @@ while True:
         data['data']['y'] = (endY-startY)/2
 
         print(data)
-        data_list.append(data)
+        data_list.append(copy.deepcopy(data))
         data['person_id'] += 1
         
     if len(data_list) > 10:
