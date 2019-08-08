@@ -13,6 +13,7 @@ import decimal
 import json
 import boto3
 import copy
+from multiprocessing import Process
 
 def insert(items):
     items = json.dumps(items)
@@ -67,11 +68,9 @@ while True:
     net.setInput(blob)
     detections = net.forward()
     
-    data = {}
-    data['timestamp'] = datetime.datetime.now().timestamp()
-    data['device'] = os.environ['DEVICE']
-    data['person_id'] = 0
-    data['data'] = {}
+    data = {'device': os.environ['DEVICE'],
+            'data': {'timestamp': datetime.datetime.now().timestamp(),
+                     'person_id': 0}}
     for i in np.arange(0, detections.shape[2]):
         confidence = detections[0, 0, i, 2]
         if confidence < 0.2:
@@ -83,12 +82,13 @@ while True:
         box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
         (startX, startY, endX, endY) = box.astype('int')
     
+        data['timestamp'] = datetime.datetime.now().timestamp()
         data['data']['x'] = (endX-startX)/2
         data['data']['y'] = (endY-startY)/2
 
-        print(data)
         data_list.append(copy.deepcopy(data))
         data['person_id'] += 1
+        print(data_list)
         
     if len(data_list) > 10:
         print(data_list)
