@@ -13,7 +13,7 @@ import decimal
 import json
 import boto3
 import copy
-from multiprocessing import Process
+import threading
 
 def insert(items):
     items = json.dumps(items)
@@ -92,6 +92,7 @@ while True:
         
     if len(data_list) > 10:
         print(data_list)
-        insert(data_list)
+        send_data = copy.deepcopy(data_list)
+        q = threading.Thread(target=insert, args=(send_data))
+        q.start()
         data_list = []
-        
