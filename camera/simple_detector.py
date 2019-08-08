@@ -87,7 +87,7 @@ while True:
         data['data']['y'] = (endY-startY)/2
 
         data_list.append(copy.deepcopy(data))
-        data['person_id'] += 1
+        data['data']['person_id'] += 1
         print(data_list)
         
     if len(data_list) > 10:
