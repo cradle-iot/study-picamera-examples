@@ -88,7 +88,6 @@ while True:
 
         data_list.append(copy.deepcopy(data))
         data['data']['person_id'] += 1
-        print(data_list)
         
     if len(data_list) > 0:
         print(data_list)
