@@ -86,12 +86,11 @@ while True:
         data['data']['x'] = (endX-startX)/2
         data['data']['y'] = (endY-startY)/2
 
+        print(data)
         data_list.append(copy.deepcopy(data))
         data['data']['person_id'] += 1
         
-    if len(data_list) > 0:
-        print(data_list)
-        send_data = copy.deepcopy(data_list)
-        q = threading.Thread(target=insert, args=(send_data,))
+    if len(data_list) > 10:
+        q = threading.Thread(target=insert, args=(data_list,))
         q.start()
         data_list = []
