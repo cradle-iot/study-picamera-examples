@@ -90,9 +90,9 @@ while True:
         data['data']['person_id'] += 1
         print(data_list)
         
-    if len(data_list) > 10:
+    if len(data_list) > 0:
         print(data_list)
         send_data = copy.deepcopy(data_list)
-        q = threading.Thread(target=insert, args=(send_data))
+        q = threading.Thread(target=insert, args=(send_data,))
         q.start()
         data_list = []
