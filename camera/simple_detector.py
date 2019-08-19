@@ -34,7 +34,7 @@ def insert(items):
         if response['ResponseMetadata']['HTTPStatusCode'] != 200:#Fail
             print(response)
         else:
-            print('Successed :', item)
+            print('Succeeded :', item)
     return
 
 #obj = ["background", "aeroplane", "bicycle", "bird", "boat",
