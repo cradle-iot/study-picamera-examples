@@ -78,8 +78,8 @@ while True:
         (startX, startY, endX, endY) = box.astype('int')
     
         data['timestamp'] = datetime.datetime.now().timestamp()
-        data['data']['x'] = (endX-startX)/2
-        data['data']['y'] = (endY-startY)/2
+        data['data']['x'] = (endX+startX)/2
+        data['data']['y'] = (endY+startY)/2
 
         print(data)
         data_list.append(copy.deepcopy(data))
