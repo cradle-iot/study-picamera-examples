@@ -7,23 +7,23 @@ import numpy as np
 import cv2
 
 from datetime import datetime
-import ambient
+#import ambient
 import os
 import sys
 
-try:        
-    AMBIENT_CHANNEL_ID = int(os.environ['AMBIENT_CHANNEL_ID'])
-    AMBIENT_WRITE_KEY = os.environ['AMBIENT_WRITE_KEY']
-except KeyError as e:
-    sys.exit('Couldn\'t find env: {}'.format(e))
+#try:        
+#    AMBIENT_CHANNEL_ID = int(os.environ['AMBIENT_CHANNEL_ID'])
+#    AMBIENT_WRITE_KEY = os.environ['AMBIENT_WRITE_KEY']
+#except KeyError as e:
+#    sys.exit('Couldn\'t find env: {}'.format(e))
 
-am = ambient.Ambient(AMBIENT_CHANNEL_ID, AMBIENT_WRITE_KEY)
+#am = ambient.Ambient(AMBIENT_CHANNEL_ID, AMBIENT_WRITE_KEY)
 
-def request(count):
-    am.send({
-        'created': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-        'd1': count,
-    })
+#def request(count):
+#    am.send({
+#        'created': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+#        'd1': count,
+#    })
     
 print('model reading')
 net = cv2.dnn.readNetFromCaffe('/var/isaax/project/camera/processor/MobileNetSSD_deploy.prototxt',
@@ -79,9 +79,9 @@ class PersonDetector(object):
         
         if count > 0:
             print('Count_person: {}'.format(count))
-            elapsed = time.time() - self.last_upload
-            if elapsed > 5:
-                request(count)
-                self.last_upload = time.time()
+#            elapsed = time.time() - self.last_upload
+#            if elapsed > 5:
+#                request(count)
+#                self.last_upload = time.time()
                 
         return frame
