@@ -68,7 +68,7 @@ class PersonDetector(object):
             count_list[idx] += 1
         
             data = {}
-            data['data'] = {'x': (endX-startX)/2, 'y':(endY-startY)/2}
+            data['data'] = {'x': (startX+endX)/2, 'y':(startY+endY)/2}
             data['timestamp'] = datetime.datetime.now().timestamp()
             data['device'] = os.environ['DEVICE']
             data['person_id'] = person_id
