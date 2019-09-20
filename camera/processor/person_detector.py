@@ -58,7 +58,7 @@ class PersonDetector(object):
             
             box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
             (startX, startY, endX, endY) = box.astype('int')
-            label = '{}: {:.2f}%'.format(obj[idx], confidence * 100)#('Person', confidence * 100)
+            label = '{}: {:.2f}%'.format('Person', confidence * 100)
             cv2.rectangle(frame, (startX, startY), (endX, endY), (0, 255, 0), 2)
             y = startY - 15 if startY - 15 > 15 else startY + 15
             cv2.putText(frame, label, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
@@ -73,7 +73,7 @@ class PersonDetector(object):
         q = threading.Thread(target=insert, args=(data_list,))
         q.start()
         data_list = []
-        
+
         return frame
     
 def insert(items):
