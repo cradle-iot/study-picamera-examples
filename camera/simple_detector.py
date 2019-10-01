@@ -71,7 +71,7 @@ while True:
         box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
         (startX, startY, endX, endY) = box.astype('int')
     
-        data['timestamp'] = decimal.Decimal(datetime.datetime.now().timestamp())
+        data['timestamp'] = decimal.Decimal(str(datetime.datetime.now().timestamp()))
         data['data']['x'] = str((endX+startX)/2)
         data['data']['y'] = str((endY+startY)/2)
 
