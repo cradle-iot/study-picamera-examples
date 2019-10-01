@@ -12,8 +12,8 @@ import threading
 import boto3
 
 def insert(items):
-    items = json.dumps(items)
-    items = json.loads(items, parse_float=decimal.Decimal)
+    #items = json.dumps(items)
+    #items = json.loads(items, parse_float=decimal.Decimal)
     #session
     session = boto3.session.Session(
                                     region_name = os.environ['REGION'],
@@ -64,12 +64,12 @@ while True:
     net.setInput(blob)
     detections = net.forward()
     
-    data['data']['timestamp'] = datetime.datetime.now().timestamp()
+    data['data']['timestamp'] = str(datetime.datetime.now())
     data['data']['person_id'] = 0
     for i in np.arange(0, detections.shape[2]):
         confidence = detections[0, 0, i, 2]
         if confidence < 0.2:
-            continue    
+            continue
         idx = int(detections[0, 0, i, 1])
         if idx != 15:#15:person
             continue
@@ -77,9 +77,9 @@ while True:
         box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
         (startX, startY, endX, endY) = box.astype('int')
     
-        data['timestamp'] = datetime.datetime.now().timestamp()
-        data['data']['x'] = (endX+startX)/2
-        data['data']['y'] = (endY+startY)/2
+        data['timestamp'] = decimal.Decimal(datetime.datetime.now().timestamp())
+        data['data']['x'] = str((endX+startX)/2)
+        data['data']['y'] = str((endY+startY)/2)
 
         print(data)
         data_list.append(copy.deepcopy(data))
