@@ -44,7 +44,7 @@ class PersonDetector(object):
 
         data_list = []
         data = {'device': os.environ['DEVICE'], 'data': {}}
-        data['data']['timestamp'] = datetime.datetime.now().timestamp()
+        data['data']['timestamp'] = str(datetime.datetime.now())
         data['data']['person_id'] = 0
         for i in np.arange(0, detections.shape[2]):
             confidence = detections[0, 0, i, 2]
@@ -63,9 +63,9 @@ class PersonDetector(object):
             y = startY - 15 if startY - 15 > 15 else startY + 15
             cv2.putText(frame, label, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
 
-            data['timestamp'] = datetime.datetime.now().timestamp()
-            data['data']['x'] = (endX+startX)/2
-            data['data']['y'] = (endY+startY)/2
+            data['timestamp'] = decimal.Decimal(str(datetime.datetime.now().timestamp()))
+            data['data']['x'] = str((endX+startX)/2)
+            data['data']['y'] = str((endY+startY)/2)
             print(data)
             data_list.append(copy.deepcopy(data))
             data['data']['person_id'] += 1
@@ -77,8 +77,8 @@ class PersonDetector(object):
         return frame
     
 def insert(items):
-    items = json.dumps(items)
-    items = json.loads(items, parse_float=decimal.Decimal)
+    # items = json.dumps(items)
+    # items = json.loads(items, parse_float=decimal.Decimal)
     #session
     session = boto3.session.Session(
                                     region_name = os.environ['REGION'],
