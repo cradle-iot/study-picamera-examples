@@ -63,7 +63,7 @@ class PersonDetector(object):
             y = startY - 15 if startY - 15 > 15 else startY + 15
             cv2.putText(frame, label, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
 
-            data['timestamp'] = decimal.Decimal(str(datetime.datetime.now().timestamp()))
+            data['timestamp'] = str(datetime.datetime.now())
             data['data']['x'] = str((endX+startX)/2)
             data['data']['y'] = str((endY+startY)/2)
             print(data)
