@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import imutils
 from imutils.video.webcamvideostream import WebcamVideoStream
-import os, copy, time, datetime, json, decimal, threading
+import os, copy, time, datetime, json, threading
 import boto3
 
 def insert(items):
