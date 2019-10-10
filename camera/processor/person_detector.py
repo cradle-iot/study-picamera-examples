@@ -23,7 +23,7 @@ class PersonDetector(object):
         self.vs = WebcamVideoStream().start()
         #self.vs = PiVideoStream(resolution=(800, 608)).start()
         self.flip = flip
-        time.sleep(2.0)
+        time.sleep(1.0)
         
     def __del__(self):
         self.vs.stop()
