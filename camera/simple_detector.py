@@ -27,8 +27,7 @@ def insert(items):
         )
         if response['ResponseMetadata']['HTTPStatusCode'] != 200:#Fail
             print(response)
-        else:
-            print('Succeeded :', item)
+    print('Succeeded')
     return
 
 #obj = ["background", "aeroplane", "bicycle", "bird", "boat",
@@ -75,7 +74,7 @@ while True:
         data['data']['x'] = str((endX+startX)/2)
         data['data']['y'] = str((endY+startY)/2)
 
-        print(data)
+        print(data['data'])
         data_list.append(copy.deepcopy(data))
         data['data']['person_id'] += 1
         
