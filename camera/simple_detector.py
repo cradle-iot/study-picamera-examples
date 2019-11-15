@@ -8,6 +8,7 @@ try: import osenv
 except: pass
 
 if os.environ.get('DEMO') == '1':
+    print('Mode: DEMO')
     import main
     main.app.run(host='0.0.0.0', debug=False, threaded=True)
 
@@ -41,6 +42,7 @@ def insert(items):
 #       "dog", "horse", "motorbike", "person", "pottedplant", "sheep",
 #       "sofa", "train", "tvmonitor"] 
 
+print('Mode: Not DEMO')
 print('starting... model reading...')
 net = cv2.dnn.readNetFromCaffe(
         'camera/processor/MobileNetSSD_deploy.prototxt',
