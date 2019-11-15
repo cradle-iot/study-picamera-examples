@@ -4,6 +4,12 @@ import imutils
 from imutils.video.webcamvideostream import WebcamVideoStream
 import os, copy, time, datetime, json, threading
 import boto3
+try: import osenv
+except: pass
+
+if os.environ.get('DEMO') == '1':
+    import main
+    main.app.run(host='0.0.0.0', debug=False, threaded=True)
 
 def insert(items):
     #items = json.dumps(items)
@@ -37,8 +43,8 @@ def insert(items):
 
 print('starting... model reading...')
 net = cv2.dnn.readNetFromCaffe(
-        '/var/isaax/project/camera/processor/MobileNetSSD_deploy.prototxt',
-        '/var/isaax/project/camera/processor/MobileNetSSD_deploy.caffemodel'
+        'camera/processor/MobileNetSSD_deploy.prototxt',
+        'camera/processor/MobileNetSSD_deploy.caffemodel'
         )
 data = {
         'device': os.environ['DEVICE'],

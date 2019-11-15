@@ -10,8 +10,9 @@ import os, time, datetime, json, copy, decimal, threading
 import boto3
 
 print('starting... model reading...')
-net = cv2.dnn.readNetFromCaffe('/var/isaax/project/camera/processor/MobileNetSSD_deploy.prototxt',
-        '/var/isaax/project/camera/processor/MobileNetSSD_deploy.caffemodel')
+net = cv2.dnn.readNetFromCaffe(
+        'camera/processor/MobileNetSSD_deploy.prototxt',
+        'camera/processor/MobileNetSSD_deploy.caffemodel')
 print('read ok.')
 
 class PersonDetector(object):
