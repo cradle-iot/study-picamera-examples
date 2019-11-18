@@ -59,7 +59,7 @@ time.sleep(2.0)
 data_list = []
 while True:
     frame = vs.read()
-    frame = imutils.resize(frame, width=300)
+    frame = imutils.resize(frame, width=500)
     (h, w) = frame.shape[:2]
     blob = cv2.dnn.blobFromImage(frame, 0.007843, (300, 300), 127.5)
     net.setInput(blob)
@@ -82,7 +82,7 @@ while True:
         data['data']['x'] = str((endX+startX)/2)
         data['data']['y'] = str((endY+startY)/2)
 
-        print(data['data'])
+        print('detected')
         data_list.append(copy.deepcopy(data))
         data['data']['person_id'] += 1
         
