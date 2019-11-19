@@ -79,8 +79,8 @@ while True:
         (startX, startY, endX, endY) = box.astype('int')
     
         data['timestamp'] = str(datetime.datetime.now())
-        data['data']['x'] = str((endX+startX)/2)
-        data['data']['y'] = str((endY+startY)/2)
+        data['data']['x'] = str((endX+startX)//2)
+        data['data']['y'] = str((endY+startY)//2)
 
         print('detected')
         data_list.append(copy.deepcopy(data))
