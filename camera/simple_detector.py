@@ -67,6 +67,7 @@ while True:
     
     data['data']['timestamp'] = str(datetime.datetime.now())
     data['data']['person_id'] = 0
+    counter = 0
     for i in np.arange(0, detections.shape[2]):
         confidence = detections[0, 0, i, 2]
         if confidence < 0.2:
@@ -82,9 +83,11 @@ while True:
         data['data']['x'] = str((endX+startX)//2)
         data['data']['y'] = str((endY+startY)//2)
 
-        print('detected')
         data_list.append(copy.deepcopy(data))
         data['data']['person_id'] += 1
+        counter += 1
+    if counter > 0:
+        print(counter)
         
     if len(data_list) > 10:
         q = threading.Thread(target=insert, args=(data_list,))
